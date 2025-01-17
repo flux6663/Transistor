@@ -9,22 +9,13 @@ Rev.    : 1.0
 #include <Arduino.h>
 #include "commandeMoteur.h"
 
-#define BOUTON_APPUYER true
-
 void setup()
 {
-    initialiserMoteur();
-    initialiserBouton();
+    initialiserMoteur(BROCHE_MOTEUR, CANAL_MLI_0);
+    initialiserPotentiometre();
 }
 
 void loop()
 {
-    if (etatBouton() == BOUTON_APPUYER)
-    {
-        allumerMoteur();
-    }
-    else
-    {
-        eteindreMoteur();
-    }
+    vitesseMoteur(consignePotentiometre());
 }

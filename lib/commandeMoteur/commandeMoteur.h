@@ -4,13 +4,20 @@
 #include <Arduino.h>
 
 #define BROCHE_MOTEUR 18
+#define BROCHE_POTENTIOMETRE 39
 #define BROCHE_BOUTON 27
+#define CANAL_MLI_0 0
 
 void initialiserBouton(uint8_t brocheBouton = BROCHE_BOUTON);
-void initialiserMoteur(uint8_t brocheMoteur = BROCHE_MOTEUR); // broche par défaut 18
+void initialiserPotentiometre(uint8_t brochePotentiometre = BROCHE_POTENTIOMETRE);
+void initialiserMoteur(uint8_t brocheMoteur = BROCHE_MOTEUR);
+void initialiserMoteur(uint8_t brocheMoteur, uint8_t canal);
+
+boolean etatBouton();
+uint8_t consignePotentiometre();
 
 void allumerMoteur();
 void eteindreMoteur();
-boolean etatBouton();
+void vitesseMoteur(uint8_t consigne);
 
 #endif
