@@ -21,6 +21,13 @@ void IRAM_ATTR actionBouton_ISR()
     }
 }
 
+/**
+ * Fonction : initialiserBouton
+ * -------------------
+ * initialisé bouton
+ *
+ * @param brocheBouton  Broche du bouton (défaut : 18)
+ */
 void initialiserBouton(uint8_t brocheBouton)
 {
     pinMode(brocheBouton, INPUT_PULLUP);
@@ -28,17 +35,40 @@ void initialiserBouton(uint8_t brocheBouton)
     _brocheBouton = brocheBouton;
 }
 
+/**
+ * Fonction : initialiserPotentiometre
+ * -------------------
+ * initialisé potentiometre
+ *
+ * @param brochePotentiometre  Broche du potentiometre (défaut : 39)
+ */
 void initialiserPotentiometre(uint8_t brochePotentiometre)
 {
     pinMode(_brochePotentiometre, INPUT);
     _brochePotentiometre = brochePotentiometre;
 }
 
+/**
+ * Fonction : initialiserMoteur
+ * -------------------
+ * initialisé moteur en commutation
+ *
+ * @param brocheMoteur  Broche du moteur (défaut : 18)
+ */
 void initialiserMoteur(uint8_t brocheMoteur)
 {
     pinMode(brocheMoteur, OUTPUT);
 }
 
+/**
+ * Fonction : initialiserMoteur
+ * -------------------
+ * Surcharge
+ * initialisé moteur avec variation de vitesse
+ *
+ * @param brocheMoteur  Broche du moteur
+ * @param canal         Canal PWM
+ */
 void initialiserMoteur(uint8_t brocheMoteur, uint8_t canal)
 {
     ledcAttachPin(brocheMoteur, 0);
@@ -47,27 +77,58 @@ void initialiserMoteur(uint8_t brocheMoteur, uint8_t canal)
     _canal = canal;
 }
 
+/**
+ * Fonction : allumerMoteur
+ * -------------------
+ * Allumer le moteur
+ */
 void allumerMoteur()
 {
     digitalWrite(_brocheMoteur, HIGH);
 }
 
+/**
+ * Fonction : eteindreMoteur
+ * -------------------
+ * Eteindre le moteur
+ */
 void eteindreMoteur()
 {
     digitalWrite(_brocheMoteur, LOW);
 }
 
+/**
+ * Fonction : consignePotentiometre
+ * -------------------
+ * Lire la consigne du potentiometre
+ *
+ * @return uint8_t : consigne du potentiometre (0 - 100%)
+ */
 uint8_t consignePotentiometre()
 {
     uint8_t consigne = (analogRead(_brochePotentiometre) * 100) / 4096;
     return consigne;
 }
 
+/**
+ * Fonction : etatBouton
+ * -------------------
+ * Lire l'état du bouton
+ *
+ * @return boolean : Vrais si appuyer
+ */
 boolean etatBouton()
 {
     return _etatBouton;
 }
 
+/**
+ * Fonction : vitesseMoteur
+ * -------------------
+ * Faire varier la vitesse du moteur en fonction d'une consigne
+ *
+ * @param consigne  Consigne de vitesse (0 - 100%)
+ */
 void vitesseMoteur(uint8_t consigne)
 {
     uint16_t vitesse = (consigne * 4096) / 100;

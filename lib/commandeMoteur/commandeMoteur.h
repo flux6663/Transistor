@@ -10,6 +10,7 @@
 
 void initialiserBouton(uint8_t brocheBouton = BROCHE_BOUTON);
 void initialiserPotentiometre(uint8_t brochePotentiometre = BROCHE_POTENTIOMETRE);
+
 void initialiserMoteur(uint8_t brocheMoteur = BROCHE_MOTEUR);
 void initialiserMoteur(uint8_t brocheMoteur, uint8_t canal);
 
